@@ -25,8 +25,8 @@ LOG_CHOICES = [
 
 class Client(models.Model):
     name = models.CharField(max_length=150, verbose_name='ФИО')
-    email = models.EmailField(unique=True, verbose_name='почта')
-    commentary = models.TextField(verbose_name='комментарий')
+    email = models.EmailField(unique=True, verbose_name='Почта')
+    commentary = models.TextField(verbose_name='Комментарий')
 
     def __str__(self):
         return {self.name}
