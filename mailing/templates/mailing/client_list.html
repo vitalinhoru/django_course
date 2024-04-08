@@ -14,9 +14,9 @@
                             <p class="card-text">E-mail: {{ object.email }}</p>
                             <p class="card-text">Комментарий: {{ object.commentary }}</p>
                         </div>
-                        <a href="#"
+                        <a href="{% url 'mailing:clients_view' object.pk %}"
                            class="btn btn-sm btn-outline-secondary">View</a>
-                        <a href="#"
+                        <a href="{% url 'mailing:clients_edit' object.pk %}"
                            class="btn btn-sm btn-outline-secondary">Edit</a>
                         <a href="{% url 'mailing:clients_delete' object.pk %}"
                            class="btn btn-sm btn-outline-danger">Delete</a>

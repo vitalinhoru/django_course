@@ -29,7 +29,7 @@ class Client(models.Model):
     commentary = models.TextField(verbose_name='Комментарий')
 
     def __str__(self):
-        return {self.name}
+        return self.name
 
     class Meta:
         verbose_name = 'клиент'
@@ -41,7 +41,7 @@ class Message(models.Model):
     content = models.TextField(verbose_name='содержание')
 
     def __str__(self):
-        return {self.topic}
+        return self.topic
 
     class Meta:
         verbose_name = 'сообщение'
@@ -49,11 +49,11 @@ class Message(models.Model):
 
 
 class Mailing(models.Model):
-    name = models.CharField(max_length=50, verbose_name='Рассылка')
+    name = models.CharField(max_length=50, verbose_name='Наименование')
     mail_to = models.ManyToManyField(Client, verbose_name='Получатели')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='Сообщение', **NULLABLE)
-    start_date = models.DateTimeField(default=timezone.now, verbose_name='Начало рассылки')
-    next_date = models.DateTimeField(default=timezone.now, verbose_name='Следующая рассылка')
+    start_date = models.DateTimeField(default=timezone.localtime, verbose_name='Начало рассылки')
+    next_date = models.DateTimeField(default=timezone.localtime, verbose_name='Следующая рассылка')
     end_date = models.DateTimeField(verbose_name='Конец рассылки')
     interval = models.CharField(default='once', max_length=10, choices=INTERVAL_CHOICES, verbose_name='Периодичность')
     status = models.CharField(default='created', max_length=10, choices=STATUS_CHOICES, verbose_name='Статус')
@@ -62,7 +62,7 @@ class Mailing(models.Model):
     is_activated = models.BooleanField(default=True, choices=ACTIVE_CHOICES, verbose_name='Активность')
 
     def __str__(self):
-        return {self.name}
+        return self.name
 
     class Meta:
         verbose_name = 'рассылка'

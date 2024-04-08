@@ -12,6 +12,16 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ object.name }}</h5>
                         </div>
+
+                        <div class="btn-group">
+                            <a href="{% url 'mailing:view' object.pk %}"
+                               class="btn btn-sm btn-outline-secondary">View</a>
+                            <a href="{% url 'mailing:edit' object.pk %}"
+                               class="btn btn-sm btn-outline-secondary">Edit</a>
+                            <a href="{% url 'mailing:delete' object.pk %}"
+                               class="btn btn-sm btn-outline-danger">Delete </a>
+                        </div>
+
                     </div>
                 </div>
             {% endfor %}

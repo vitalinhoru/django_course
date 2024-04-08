@@ -1,9 +1,9 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, DetailView, UpdateView
 from django.urls import reverse_lazy
+from django.shortcuts import render
 
-from mailing.forms import MailingForm, ClientForm
-from mailing.models import Mailing, Client
+from mailing.forms import MailingForm, ClientForm, MessageForm
+from mailing.models import Mailing, Client, Message
 
 
 class HomePageListView(ListView):
@@ -19,12 +19,23 @@ class MailingListView(ListView):
 class MailingCreateView(CreateView):
     model = Mailing
     form_class = MailingForm
-    # permission_required = 'catalog.add_product'
     success_url = reverse_lazy('mailing:mailing')
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+
+class MailingDetailView(DetailView):
+    model = Mailing
+    template_name = 'mailing/mailing_detail.html'
+
+
+class MailingUpdateView(UpdateView):
+    model = Mailing
+    form_class = MailingForm
+    success_url = reverse_lazy('mailing:mailing')
+
+
+class MailingDeleteView(DeleteView):
+    model = Mailing
+    success_url = reverse_lazy('mailing:mailing')
 
 
 class ClientListView(ListView):
@@ -38,6 +49,23 @@ class ClientCreateView(CreateView):
     success_url = reverse_lazy('mailing:clients')
 
 
+class ClientDetailView(DetailView):
+    model = Client
+    template_name = 'mailing/client_detail.html'
+
+
+class ClientUpdateView(UpdateView):
+    model = Client
+    form_class = ClientForm
+    success_url = reverse_lazy('mailing:clients')
+
+
 class ClientDeleteView(DeleteView):
     model = Client
     success_url = reverse_lazy('mailing:clients')
+
+
+class MessageCreateView(CreateView):
+    model = Message
+    form_class = MessageForm
+    success_url = reverse_lazy('mailing:create')
