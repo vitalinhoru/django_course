@@ -14,7 +14,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, verbose_name='Почта')
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватар', **NULLABLE)
     phone = models.CharField(max_length=20, verbose_name='Телефон', **NULLABLE)
-    verify_code = models.CharField(max_length=15, verbose_name='Код верификации почты', **NULLABLE)
+    verification_token = models.CharField(max_length=100, blank=True, verbose_name='Код подтверждения почты')
     is_active = models.BooleanField(default=False, choices=ACTIVE_CHOICES, verbose_name='Почта активирована')
 
     USERNAME_FIELD = "email"
