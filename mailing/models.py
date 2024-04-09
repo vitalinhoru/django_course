@@ -52,8 +52,8 @@ class Mailing(models.Model):
     name = models.CharField(max_length=50, verbose_name='Наименование')
     mail_to = models.ManyToManyField(Client, verbose_name='Получатели')
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='Сообщение', **NULLABLE)
-    start_date = models.DateTimeField(default=timezone.localtime, verbose_name='Начало рассылки')
-    next_date = models.DateTimeField(default=timezone.localtime, verbose_name='Следующая рассылка')
+    start_date = models.DateTimeField(default=timezone.now, verbose_name='Начало рассылки')
+    next_date = models.DateTimeField(default=timezone.now, verbose_name='Следующая рассылка')
     end_date = models.DateTimeField(verbose_name='Конец рассылки')
     interval = models.CharField(default='once', max_length=10, choices=INTERVAL_CHOICES, verbose_name='Периодичность')
     status = models.CharField(default='created', max_length=10, choices=STATUS_CHOICES, verbose_name='Статус')
@@ -72,7 +72,7 @@ class Mailing(models.Model):
 
 class Logs(models.Model):
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE, verbose_name='Рассылка', **NULLABLE)
-    last_datetime_sending = models.DateTimeField(auto_now=True, verbose_name='время рассылки', **NULLABLE)
+    last_datetime_sending = models.DateTimeField(auto_now=True, verbose_name='Время рассылки', **NULLABLE)
     status = models.CharField(default=False, max_length=30, choices=LOG_CHOICES, verbose_name='попытка', **NULLABLE)
 
     def __str__(self):

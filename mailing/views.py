@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 
 from mailing.forms import MailingForm, ClientForm, MessageForm
-from mailing.models import Mailing, Client, Message
+from mailing.models import Mailing, Client, Message, Logs
 
 
 class HomePageListView(ListView):
@@ -69,3 +69,8 @@ class MessageCreateView(CreateView):
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('mailing:create')
+
+
+class LogsListView(ListView):
+    model = Logs
+    template_name = 'mailing/logs_list.html'

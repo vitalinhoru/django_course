@@ -1,0 +1,6 @@
+{% for object in object_list %}
+    <h3>Рассылка: {{ object.mailing }}</h3>
+    <p>Время последней рассылки: {{ object.last_datetime_sending }}</p>
+    <p>Статус: {{ object.status }}</p>
+    <p>---</p>
+{% endfor %}

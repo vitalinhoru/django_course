@@ -1,0 +1,185 @@
+[
+  {
+    "model": "mailing.client",
+    "pk": 5,
+    "fields": {
+      "name": "Макейкина Наталья Владимировна",
+      "email": "benovalka@gmail.com",
+      "commentary": "Красоткина"
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 6,
+    "fields": {
+      "name": "Кириллов Виталий Вячесловович",
+      "email": "kirillovitaly@mail.ru",
+      "commentary": "Классный чел"
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 1,
+    "fields": {
+      "topic": "пельмешки",
+      "content": "Надо сварить"
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 30,
+    "fields": {
+      "name": "fdd",
+      "message": 1,
+      "start_date": "2024-04-08T16:00:00Z",
+      "next_date": "2024-04-08T16:02:00Z",
+      "end_date": "2024-04-08T16:02:00Z",
+      "interval": "once",
+      "status": "finished",
+      "is_activated": true,
+      "mail_to": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 31,
+    "fields": {
+      "name": "eee",
+      "message": 1,
+      "start_date": "2024-04-08T16:05:00Z",
+      "next_date": "2024-04-08T16:07:00Z",
+      "end_date": "2024-04-08T16:07:00Z",
+      "interval": "once",
+      "status": "finished",
+      "is_activated": true,
+      "mail_to": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 32,
+    "fields": {
+      "name": "sddsd",
+      "message": 1,
+      "start_date": "2024-04-09T08:03:00Z",
+      "next_date": "2024-04-09T08:05:00Z",
+      "end_date": "2024-04-09T08:05:00Z",
+      "interval": "once",
+      "status": "finished",
+      "is_activated": true,
+      "mail_to": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 33,
+    "fields": {
+      "name": "dsdf",
+      "message": 1,
+      "start_date": "2024-04-09T08:46:00Z",
+      "next_date": "2024-04-09T08:48:00Z",
+      "end_date": "2024-04-09T08:48:00Z",
+      "interval": "once",
+      "status": "created",
+      "is_activated": true,
+      "mail_to": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailing",
+    "pk": 34,
+    "fields": {
+      "name": "rrrrr",
+      "message": 1,
+      "start_date": "2024-04-09T11:48:00Z",
+      "next_date": "2024-04-09T11:50:00Z",
+      "end_date": "2024-04-09T11:50:00Z",
+      "interval": "once",
+      "status": "created",
+      "is_activated": true,
+      "mail_to": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 41,
+    "fields": {
+      "mailing": 30,
+      "last_datetime_sending": "2024-04-08T15:57:00.634Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 42,
+    "fields": {
+      "mailing": 30,
+      "last_datetime_sending": "2024-04-08T16:03:01.598Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 43,
+    "fields": {
+      "mailing": 31,
+      "last_datetime_sending": "2024-04-08T16:03:02.254Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 44,
+    "fields": {
+      "mailing": 31,
+      "last_datetime_sending": "2024-04-08T16:07:02.799Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 45,
+    "fields": {
+      "mailing": 32,
+      "last_datetime_sending": "2024-04-09T08:45:00.836Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 46,
+    "fields": {
+      "mailing": 33,
+      "last_datetime_sending": "2024-04-09T08:45:01.575Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 47,
+    "fields": {
+      "mailing": 34,
+      "last_datetime_sending": "2024-04-09T08:45:02.249Z",
+      "status": "True"
+    }
+  },
+  {
+    "model": "mailing.logs",
+    "pk": 48,
+    "fields": {
+      "mailing": 32,
+      "last_datetime_sending": "2024-04-09T08:46:00.598Z",
+      "status": "True"
+    }
+  }
+]
