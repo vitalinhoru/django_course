@@ -83,10 +83,31 @@ class ClientDeleteView(DeleteView):
     success_url = reverse_lazy('mailing:clients')
 
 
+class MessageListView(ListView):
+    model = Message
+    template_name = 'mailing/message_list.html'
+
+
 class MessageCreateView(CreateView):
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('mailing:create')
+
+
+class MessageDetailView(DetailView):
+    model = Message
+    template_name = 'mailing/message_detail.html'
+
+
+class MessageUpdateView(UpdateView):
+    model = Message
+    form_class = MessageForm
+    success_url = reverse_lazy('mailing:message')
+
+
+class MessageDeleteView(DeleteView):
+    model = Message
+    success_url = reverse_lazy('mailing:message')
 
 
 class LogsListView(ListView):

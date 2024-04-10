@@ -16,8 +16,6 @@
                                         Добавить рассылку
                                     {% endif %}
                                 </h3>
-                                <a href="{% url 'mailing:clients' %}">Получатели</a> /
-                                <a href="{% url 'mailing:create' %}">Добавить сообщение</a>
                             </div>
                             <div class="card-body">
                                 {% csrf_token %}
