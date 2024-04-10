@@ -1,14 +1,26 @@
 from django.views.generic import ListView, CreateView, DeleteView, DetailView, UpdateView
 from django.urls import reverse_lazy
-from django.shortcuts import render
+import random
 
+from blog.models import Blog
 from mailing.forms import MailingForm, ClientForm, MessageForm
 from mailing.models import Mailing, Client, Message, Logs
+from mailing.services import get_cache_mailing_count, get_cache_mailing_active
 
 
 class HomePageListView(ListView):
     model = Mailing
-    template_name = 'mailing/base.html'
+    template_name = 'mailing/home.html'
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['mailings_count'] = get_cache_mailing_count()
+        context_data['active_mailings_count'] = get_cache_mailing_active()
+        context_data['clients_count'] = len(Client.objects.all())
+        blog_list = list(Blog.objects.all())
+        random.shuffle(blog_list)
+        context_data['blog_list'] = blog_list[:3]
+        return context_data
 
 
 class MailingListView(ListView):
