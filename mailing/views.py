@@ -21,6 +21,12 @@ class MailingCreateView(CreateView):
     form_class = MailingForm
     success_url = reverse_lazy('mailing:mailing')
 
+    def form_valid(self, form, *args, **kwargs):
+        new_mailing = form.save(commit=False)
+        new_mailing.owner = self.request.user
+        new_mailing.save()
+        return super().form_valid(form)
+
 
 class MailingDetailView(DetailView):
     model = Mailing
