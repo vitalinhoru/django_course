@@ -1,13 +1,14 @@
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.utils.crypto import get_random_string
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 
 
@@ -41,8 +42,17 @@ class VerifyEmailView(View):
     def get(self, request, uid, token):
         try:
             user = get_object_or_404(User, pk=uid, verification_token=token)
-            user.is_verified = True
+            user.is_active = True
             user.save()
             return render(request, 'users/register_success.html')  # Покажем сообщение о регистрации
         except User.DoesNotExist:
             return render(request, 'users/register_failed.html')  # Покажем сообщение об ошибке
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserProfileForm
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
