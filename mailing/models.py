@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
+from users.models import User
+
 NULLABLE = {'blank': True, 'null': True}
 STATUS_CHOICES = [
     ('created', 'Создана'),
@@ -57,9 +59,8 @@ class Mailing(models.Model):
     end_date = models.DateTimeField(verbose_name='Конец рассылки')
     interval = models.CharField(default='once', max_length=10, choices=INTERVAL_CHOICES, verbose_name='Периодичность')
     status = models.CharField(default='created', max_length=10, choices=STATUS_CHOICES, verbose_name='Статус')
-    # owner = models.ForeignKey(users.models.User, on_delete=models.CASCADE, null=True, verbose_name='Владелец рассылки')
-
     is_activated = models.BooleanField(default=True, choices=ACTIVE_CHOICES, verbose_name='Активность')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Владелец рассылки')
 
     def __str__(self):
         return self.name

@@ -2,6 +2,7 @@ from django import forms
 from django.forms import DateTimeInput
 
 from mailing.models import Mailing, Client, Message
+from users.models import User
 
 
 class StyleFormMixin:

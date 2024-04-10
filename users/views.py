@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.utils.crypto import get_random_string
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
@@ -56,3 +56,14 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    extra_context = {'title': 'Пользователи',}
+
+    # def test_func(self):
+    #     _user = self.request.user
+    #     if _user.has_perms(['users.set_is_active',]):
+    #         return True
+    #     return self.handle_no_permission()
