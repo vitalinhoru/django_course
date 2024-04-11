@@ -1,9 +1,10 @@
 from django.views.generic import ListView, CreateView, DeleteView, DetailView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 import random
 
 from blog.models import Blog
-from mailing.forms import MailingForm, ClientForm, MessageForm
+from mailing.forms import MailingForm, ClientForm, MessageForm, MailingModeratorForm
 from mailing.models import Mailing, Client, Message, Logs
 from mailing.services import get_cache_mailing_count, get_cache_mailing_active
 
@@ -23,7 +24,7 @@ class HomePageListView(ListView):
         return context_data
 
 
-class MailingListView(ListView):
+class MailingListView(LoginRequiredMixin, ListView):
     model = Mailing
     template_name = 'mailing/mailing_list.html'
 
@@ -50,6 +51,17 @@ class MailingUpdateView(UpdateView):
     form_class = MailingForm
     success_url = reverse_lazy('mailing:mailing')
 
+    def get_form_class(self):
+        if self.request.user == self.get_object().owner:
+            return MailingForm
+        # elif self.request.user.has_perm('mailing.set_is_activated'):
+        #     return MailingModeratorForm
+
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs["user"] = self.request.user
+    #     return kwargs
+
 
 class MailingDeleteView(DeleteView):
     model = Mailing
@@ -65,6 +77,12 @@ class ClientCreateView(CreateView):
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mailing:clients')
+
+    def form_valid(self, form, *args, **kwargs):
+        new_client = form.save()
+        new_client.owner = self.request.user
+        new_client.save()
+        return super().form_valid(form)
 
 
 class ClientDetailView(DetailView):
@@ -92,6 +110,12 @@ class MessageCreateView(CreateView):
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('mailing:create')
+
+    def form_valid(self, form, *args, **kwargs):
+        new_message = form.save()
+        new_message.owner = self.request.user
+        new_message.save()
+        return super().form_valid(form)
 
 
 class MessageDetailView(DetailView):
