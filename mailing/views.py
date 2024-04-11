@@ -48,14 +48,14 @@ class MailingDetailView(DetailView):
 
 class MailingUpdateView(UpdateView):
     model = Mailing
-    form_class = MailingForm
+    # form_class = MailingForm
     success_url = reverse_lazy('mailing:mailing')
 
     def get_form_class(self):
         if self.request.user == self.get_object().owner:
             return MailingForm
-        # elif self.request.user.has_perm('mailing.set_is_activated'):
-        #     return MailingModeratorForm
+        elif self.request.user.has_perm('mailing.set_is_activated'):
+            return MailingModeratorForm
 
     # def get_form_kwargs(self):
     #     kwargs = super().get_form_kwargs()
