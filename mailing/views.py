@@ -1,6 +1,7 @@
+from django.contrib.auth.decorators import permission_required
 from django.views.generic import ListView, CreateView, DeleteView, DetailView, UpdateView
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 import random
 
 from blog.models import Blog
@@ -46,9 +47,9 @@ class MailingDetailView(DetailView):
     template_name = 'mailing/mailing_detail.html'
 
 
-class MailingUpdateView(UpdateView):
+class MailingUpdateView(PermissionRequiredMixin, UpdateView):
     model = Mailing
-    # form_class = MailingForm
+    permission_required = 'mailing.change_mailing'
     success_url = reverse_lazy('mailing:mailing')
 
     def get_form_class(self):
